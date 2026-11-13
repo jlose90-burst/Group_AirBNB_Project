@@ -1,0 +1,124 @@
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/static/images/logo_face.svg">
+    <title>{{ location.name }} - LairBnB</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/book_location.css">
+  </head>
+
+  <body class="page_book">
+    <header class="page_top_header header_split">
+
+        <nav class="nav">
+          
+          <a href="/locations">All Lairs</a>
+          {% if session.user_id %}
+            <a href="/locations/new">List a Lair</a>
+            <a href="/requests">My Requests</a>
+            <a href="/my-locations">My Locations</a>
+
+          {% else %}
+            <a href="/login">Log in</a>
+            <a href="/signup">Sign up</a>
+          {% endif %}
+
+        </nav>
+        
+        <a href="/locations" class="logo">
+          <img src="/static/images/logo_face.svg" alt="LairBnB Logo Face" class="site_icon">
+          <img src="/static/images/logo_text_2.svg" alt="LairBnB Logo" class="site_logo">
+        </a>
+
+      <div class="header_actions">
+        {% if session.user_id %}
+          <form action="/logout" method="POST">
+            <button type="submit" class="btn_secondary">Log Out</button>
+          </form>
+        {% endif %}
+      </div>
+
+    </header>
+
+
+
+
+    <main class="book_container">
+
+      <div class="card lair_detail">
+
+        <div class="lair_image_container">
+
+          {% if location.image_1_url and location.image_1_url != "None" %}
+            <img src="{{ location.image_1_url }}" alt="{{ location.name }}" class="lair_detail_image">
+          {% else %}
+            <img src="{{ url_for('static', filename='images/' ~ location.id ~ '_1.png') }}" alt="{{ location.name }}" class="lair_detail_image">
+          {% endif %}
+
+          
+          {% if location.image_2_url and location.image_2_url != "None" %}
+            <img src="{{ location.image_2_url }}" alt="{{ location.name }}" class="lair_detail_image">
+          {% else %}
+            <img src="{{ url_for('static', filename='images/' ~ location.id ~ '_2.png') }}" alt="{{ location.name }}" class="lair_detail_image">
+          {% endif %}
+
+          
+          {% if location.image_2_url and location.image_2_url != "None" %}
+            <img src="{{ location.image_3_url }}" alt="{{ location.name }}" class="lair_detail_image">
+          {% else %}
+            <img src="{{ url_for('static', filename='images/' ~ location.id ~ '_3.png') }}" alt="{{ location.name }}" class="lair_detail_image">
+          {% endif %}
+        </div>
+
+        <div class="lair_info">
+
+          <h1>{{ location.name }}</h1>
+          <p class="city">{{ location.city }}</p>
+          <p class="description">{{ location.description }}</p>
+          <p class="price">£{{ location.price_per_night }} per night</p>
+          
+          <h2>Book a night</h2>
+          
+          {% if error %}
+          <p class="message message-error">{{ error }}</p>
+          {% endif %}
+          
+          {% if available_dates %}
+
+          <form method="POST" action="/locations/{{ location.id }}">
+            <div class="booking_form">
+
+              <label for="dates">Available dates</label>
+
+              <select id="dates" name="dates" class="date_select" required>
+                <option value="">Select a date</option>
+                {% for available_date in available_dates %}
+                <option value="{{ available_date }}">
+                  {{ available_date.strftime('%A %d %B %Y') }}
+                </option>
+                {% endfor %}
+              </select>
+
+            </div>
+            
+            <button type="submit" class="btn_primary">Book</button>
+
+          </form>
+
+          {% else %}
+          <p class="empty_state">No free nights at this lair right now.</p>
+          {% endif %}
+
+        </div>
+
+      </div>
+
+      <div class="page_footer">
+        <a href="/locations" class="link">← Back to All Lairs</a>
+      </div>
+
+    </main>
+  </body>
+</html>

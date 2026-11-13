@@ -1,0 +1,94 @@
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/static/images/logo_face.svg">
+    <title>All Lairs - LairBnB</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/locations.css">
+  </head>
+
+  <body class="page_locations">
+    <header class="page_top_header header_split">
+
+        <nav class="nav">
+          
+          <a href="/locations">All Lairs</a>
+          {% if session.user_id %}
+            <a href="/locations/new">List a Lair</a>
+            <a href="/requests">My Requests</a>
+            <a href="/my-locations">My Locations</a>
+
+          {% else %}
+            <a href="/login">Log In</a>
+            <a href="/signup">Sign Up</a>
+          {% endif %}
+
+        </nav>
+        
+        <a href="/locations" class="logo">
+          <img src="/static/images/logo_face.svg" alt="LairBnB Logo Face" class="site_icon">
+          <img src="/static/images/logo_text_2.svg" alt="LairBnB Logo" class="site_logo">
+        </a>
+
+      <div class="header_actions">
+        {% if session.user_id %}
+          <form action="/logout" method="POST">
+            <button type="submit" class="btn_secondary">Log Out</button>
+          </form>
+        {% endif %}
+      </div>
+
+    </header>
+
+
+
+    <main class="page_container">
+
+        <header class="page_header">
+          <h1>My Lairs</h1>
+          <p>Every evil hideout you have listed. Help your fellow villans plot their next escape.</p>
+        </header>
+
+        {% if locations %}
+          <div class="lair_carousel_container">
+
+            <ul class="lair_grid">
+
+              {% for location in locations %}
+                <li class="lair_card">
+                  <div class="lair_image_wrapper">
+                    {% if location.image_1_url and location.image_1_url != "None" %}
+                      <img src="{{ location.image_1_url }}" alt="{{ location.name }}" class="lair_image" loading="lazy">
+                    {% else %}
+                      <img src="{{ url_for('static', filename='images/' ~ location.id ~ '_1.png') }}" alt="{{ location.name }}" class="lair_image" loading="lazy">
+                    {% endif %}
+                  </div>
+                  <div class="lair_card_body">
+                    <h2><a href="/locations/{{ location.id }}">{{ location.name }}</a></h2>
+                    <p class="lair_city">{{ location.city }}</p>
+                    <p class="lair_description">{{ location.description | truncate(120) }}</p>
+                    <p class="lair_price">£{{ location.price_per_night }} per night</p>
+
+                    <div class="card_actions">  
+                      <a href="/locations/{{ location.id }}" class="btn_secondary">View Listing</a> 
+                      <a href="/locations/{{ location.id }}/edit" class="btn_secondary">Edit Listing</a>
+                    </div>
+
+                  </div>
+                </li>
+              {% endfor %}
+
+            </ul>
+
+          </div>
+        {% else %}
+            <p class="empty_message">You haven't listed any locations yet. <a href="/locations/new" class="link">List a Lair</a>.</p>
+        {% endif %}
+
+    </main>
+
+  </body>
+
+</html>

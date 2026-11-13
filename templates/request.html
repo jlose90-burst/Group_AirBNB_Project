@@ -1,0 +1,158 @@
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/static/images/logo_face.svg">
+    <title>My Requests - LairBnB</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/requests.css">
+  </head>
+
+  <body class="page_requests">
+    
+    
+    <header class="page_top_header header_split">
+
+        <nav class="nav">
+          
+          <a href="/locations">All Lairs</a>
+          {% if session.user_id %}
+            <a href="/locations/new">List a Lair</a>
+            <a href="/requests">My Requests</a>
+            <a href="/my-locations">My Locations</a>
+
+          {% else %}
+            <a href="/login">Log In</a>
+            <a href="/signup">Sign Up</a>
+          {% endif %}
+
+        </nav>
+        
+        <a href="/locations" class="logo">
+          <img src="/static/images/logo_face.svg" alt="LairBnB Logo Face" class="site_icon">
+          <img src="/static/images/logo_text_2.svg" alt="LairBnB Logo" class="site_logo">
+        </a>
+
+      <div class="header_actions">
+        {% if session.user_id %}
+          <form action="/logout" method="POST">
+            <button type="submit" class="btn_secondary">Log Out</button>
+          </form>
+        {% endif %}
+      </div>
+
+    </header>
+
+    <main class="page_container">
+
+        <header class="page_header">
+          <h1>My Requests</h1>
+          <p>Nights you've asked for, and requests for your lairs.</p>
+        </header>
+
+        <div class="requests_grid">
+          <section class="requests_section">
+            <h2>Requests I've Made</h2>
+            <div class="table_card">
+              {% if my_requests %}
+                <table class="requests_table">
+                  <thead>
+                    <tr>
+                      <th>Lair</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                      <th>Chat</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for booking in my_requests %}
+                      <tr>
+                        <td>{{ booking.location_name }}</td>
+                        <td>{{ booking.date }}</td>
+                        <td>
+                          {% if booking.confirmed %}
+                            <span class="status status_confirmed">Confirmed</span>
+                          {% else %}
+                            <span class="status status_pending">Pending</span>
+                          {% endif %}
+                        </td>
+                        <td>
+                        {% if booking.confirmed %}
+                          <a href="/bookings/{{ booking.id }}/chat" class="btn_secondary">Chat</a>
+                        {% else %}
+                          <span class="empty_cell_dash">-</span>
+                        {% endif %}
+                      </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              {% else %}
+                <p class="empty_message">You haven't requested any lairs yet. <a href="/locations" class="link">Browse Lairs</a>.</p>
+              {% endif %}
+            </div>
+          </section>
+          
+          <section class="requests_section">
+            <h2>Requests for My Lairs</h2>
+            <div class="table_card">
+              {% if requests_for_my_locations %}
+                <table class="requests_table">
+                  <thead>
+                    <tr>
+                      <th>Lair</th>
+                      <th>Date</th>
+                      <th>Requested By</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                      <th>Chat</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for booking in requests_for_my_locations %}
+                      <tr>
+                        <td>{{ booking.location_name }}</td>
+                        <td>{{ booking.date }}</td>
+                        <td>{{ booking.guest_username }}</td>
+                        <td>
+                          {% if booking.confirmed %}
+                            <span class="status status_confirmed">Confirmed</span>
+                          {% else %}
+                            <span class="status status_pending">Pending</span>
+                          {% endif %}
+                        </td>
+                        <td>
+                          {% if not booking.confirmed %}
+                            <div class="action_buttons">
+                              <form method="POST" action="/bookings/{{ booking.id }}/confirm">
+                                <button type="submit" class="btn_primary">Confirm</button>
+                              </form>
+                              <form method="POST" action="/bookings/{{ booking.id }}/deny">
+                                <button type="submit" class="btn_secondary">Deny</button>
+                              </form>
+                            </div>
+                          {% endif %}
+                        </td>
+                        <td>
+                        {% if booking.confirmed %}
+                          <a href="/bookings/{{ booking.id }}/chat" class="btn_secondary">Chat</a>
+                        {% else %}
+                          <span class="empty_cell_dash">-</span>
+                        {% endif %}
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              {% else %}
+                <p class="empty_message">No one has requested your lairs yet.</p>
+              {% endif %}
+            </div>
+          </section>
+        </div>
+    </main>
+
+  </body>
+
+</html>

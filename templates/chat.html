@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="/static/images/logo_face.svg">
+        <title>Chat - LairBnB</title>
+        <link rel="stylesheet" href="/static/style.css">
+        <link rel="stylesheet" href="/static/chat.css">
+    </head>
+
+    <body class="page_chat">
+
+        <header class="page_top_header header_split">
+          
+          <nav class="nav">
+            <a href="/locations">All Lairs</a>
+            {% if session.user_id %}
+              <a href="/locations/new">List a Lair</a>
+              <a href="/requests">My Requests</a>
+            {% else %}
+              <a href="/login">Log In</a>
+              <a href="/signup">Sign Up</a>
+            {% endif %}
+          </nav>
+
+          <a href="/locations" class="logo">
+            <img src="/static/images/logo_face.svg" alt="LairBnB Logo Face" class="site_icon">
+            <img src="/static/images/logo_text_2.svg" alt="LairBnB Logo" class="site_logo">
+          </a>
+
+          <div class="header_actions">
+            {% if session.user_id %}
+              <form action="/logout" method="POST">
+                <button type="submit" class="btn_secondary">Log Out</button>
+              </form>
+            {% endif %}
+          </div>
+
+        </header>
+
+        <main class="chat_container">
+
+          <div class="chat_header">
+              <h1>{{ location.name }}</h1>
+              <p>Booking Date: {{ booking.date }}</p>
+          </div>
+
+          <div class="chat_card">
+            <div class="chat_messages_box">
+
+              {% for msg in messages %}
+                <div class="chat_bubble {{ 'chat_bubble_mine' if msg.sender_id == current_user_id else 'chat_bubble_theirs' }}">
+
+                  <div class="chat_meta">
+                    <span class="chat_sender">{{ msg.sender_username }}</span>
+                    {% if msg.timestamp %}
+                      <span class="chat_time">• {{ msg.timestamp.strftime('%H:%M') }}</span>
+                    {% endif %}
+                  </div>
+
+                  <p class="chat_text">{{ msg.content }}</p>
+
+                </div>
+
+              {% else %}
+                <p class="empty_message">No messages yet. Start the conversation!</p>
+              {% endfor %}
+
+            </div>
+
+            <form method="POST" action="/bookings/{{ booking.id }}/chat" class="chat_form">
+
+              <div class="form_group">
+                <label for="content">Message</label>
+                <input type="text" id="content" name="content" placeholder="Write a reply..." required autocomplete="off">
+              </div>
+              
+              <button type="submit" class="btn_primary">Send</button>
+
+            </form>
+
+          </div>
+
+          <div class="page_footer">
+            <a href="/requests" class="link">← Back to Requests</a>
+          </div>
+
+          <script>
+            const box = document.querySelector('.chat_messages_box');
+            if (box) box.scrollTop = box.scrollHeight;
+            document.getElementById('content').focus();
+          </script>
+
+        </main>
+
+    </body>
+
+</html>

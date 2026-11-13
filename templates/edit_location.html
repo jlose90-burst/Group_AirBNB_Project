@@ -1,0 +1,103 @@
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/static/images/logo_face.svg">
+    <title>List a Lair - LairBnB</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/list.css">
+  </head>
+
+  <body class="page_list">
+
+    <header class="page_top_header header_split">
+
+        <nav class="nav">
+          
+          <a href="/locations">All Lairs</a>
+          {% if session.user_id %}
+            <a href="/locations/new">List a Lair</a>
+            <a href="/requests">My Requests</a>
+            <a href="/my-locations">My Locations</a>
+
+          {% else %}
+            <a href="/login">Log In</a>
+            <a href="/signup">Sign Up</a>
+          {% endif %}
+
+        </nav>
+        
+        <a href="/locations" class="logo">
+          <img src="/static/images/logo_face.svg" alt="LairBnB Logo Face" class="site_icon">
+          <img src="/static/images/logo_text_2.svg" alt="LairBnB Logo" class="site_logo">
+        </a>
+
+      <div class="header_actions">
+        {% if session.user_id %}
+          <form action="/logout" method="POST">
+            <button type="submit" class="btn_secondary">Log Out</button>
+          </form>
+        {% endif %}
+      </div>
+
+    </header>
+
+
+    <main class="page_list">
+
+        <header class="page_header">
+          <h1>Update Your Lair</h1>
+          <p>Make your lair stand out from the rest.</p>
+        </header>
+
+        <form method="POST" action="/locations/{{ location.id }}/edit" class="list_form">
+
+          {% if error %}
+            <p class="error_message">{{ error }}</p>
+          {% endif %}
+
+          <div class="form_group">
+            <label for="name">Lair Name</label>
+            <input type="text" id="name" name="name" value="{{ location.name }}" required>
+          </div>
+
+          <div class="form_group">
+            <label for="city">City / Location</label>
+            <input type="text" id="city" name="city" value="{{ location.city }}" required>
+          </div>
+
+          <div class="form_group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" required>{{ location.description }}</textarea>
+          </div>
+
+          <div class="form_group">
+            <label for="price_per_night">Price per Night (£)</label>
+            <input type="number" id="price_per_night" name="price_per_night" min="1" value="{{ location.price_per_night }}" required>
+          </div>
+
+          <div class="form_group">
+            <label for="image_1_url">Image URL 1</label>
+            <input type="text" id="image_1_url" name="image_1_url" value="{{ location.image_1_url }}" required>
+          </div>
+
+          <div class="form_group">
+            <label for="image_2_url">Image URL 2</label>
+            <input type="text" id="image_2_url" name="image_2_url" value="{{ location.image_2_url }}" required>
+          </div>
+
+          <div class="form_group">
+            <label for="image_3_url">Image URL 3</label>
+            <input type="text" id="image_3_url" name="image_3_url" value="{{ location.image_3_url }}" required>
+          </div>
+
+          <button type="submit" class="btn_primary">Update My Lair</button>
+
+        </form>
+
+    </main>
+
+  </body>
+
+</html>
