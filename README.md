@@ -64,7 +64,7 @@ pytest tests/test_presentation.py --headed
 <img width="1882" height="1222" alt="image" src="https://github.com/user-attachments/assets/1ae8da8e-b742-4f49-93e1-e04b9f1533ca" />
 ===============================
 
-## 📋 Project Highlights for Employers
+## 📋 Project Highlights 
 
 - Full-stack ownership of features from database schema to UI
 - Test-driven development with unit, integration, and end-to-end (Playwright) tests
