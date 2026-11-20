@@ -15,6 +15,14 @@ LairBnB is a full-stack web application built in **Python** with **Flask**, **Po
 
 Perfect for fans of over-the-top evil lairs and seamless booking experiences.
 
+### Demo Video
+
+The headed Playwright tests (run via `pytest tests/test_presentation.py --headed`) show the full user flow in a real browser: a new user signs up, lists a location (lair), and books a stay.
+
+<video src="./demo.mp4" controls width="800"></video>
+
+*(Video demo of the app in action, including signup, listing, booking, requests, and chat.)*
+
 ===============================
 
 ## MakersBnB Python Project Seed
