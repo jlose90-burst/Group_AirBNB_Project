@@ -19,7 +19,11 @@ Perfect for fans of over-the-top evil lairs and seamless booking experiences.
 
 The headed Playwright tests (run via `pytest tests/test_presentation.py --headed`) show the full user flow in a real browser: a new user signs up, lists a location (lair), and books a stay.
 
-demo.mp4
+
+
+https://github.com/user-attachments/assets/80f46cf2-b905-4e78-bf89-5cdee51f77bf
+
+
 
 ===============================
 
