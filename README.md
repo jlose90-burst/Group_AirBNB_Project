@@ -47,18 +47,11 @@ This repo contains the seed codebase for the MakersBnB project in Python (using 
 (makersbnb-venv); playwright install
 # If you have problems with the above, contact your coach
 
-# Create a test and development database
-(makersbnb-venv); createdb YOUR_PROJECT_NAME
-(makersbnb-venv); createdb YOUR_PROJECT_NAME_TEST
-
-# Open lib/database_connection.py and change the database names
-(makersbnb-venv); open lib/database_connection.py
-
 # Run the tests (with extra logging)
 (makersbnb-venv); pytest -sv
 
 # Run the app
 (makersbnb-venv); python app.py
 
-# Now visit http://localhost:5001/index in your browser
+# Now visit http://localhost:5001/ in your browser
 ```
