@@ -60,6 +60,9 @@ pytest tests/test_presentation.py --headed
 ```
 
 ===============================
+## 🎟️ Example Trello Ticket
+<img width="1882" height="1222" alt="image" src="https://github.com/user-attachments/assets/1ae8da8e-b742-4f49-93e1-e04b9f1533ca" />
+===============================
 
 ## 📋 Project Highlights for Employers
 
