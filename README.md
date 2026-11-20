@@ -1,12 +1,33 @@
-# MakersBnB Python Project Seed
+# 🏠 LairBnB
 
-This repo contains the seed codebase for the MakersBnB project in Python (using 
-Flask and Pytest).
+**A villain-themed twist on accommodation booking** — list and hire lairs for the night, from Emperor Palpatine hosting on the Death Star to Dr. Evil’s volcano lair.
 
-Someone in your team should "Use this template" to create a copy of the codebase on their GitHub account.
-Everyone in the team should then clone that copy of the repo to their local machine.
+===============================
 
-> NOTE: If you encounter a `ModuleNotFound` error, deactivate and then reactivate your virtual env. If that doesn't help, please reach out to your coach.
+## 🚀 About the Project
+
+LairBnB is a full-stack web application built in **Python** with **Flask**, **PostgreSQL**, and **Jinja**. Developed over a one-week sprint using Trello and Kanban methodology with pair programming, the team delivered:
+
+- 🔐 User authentication and multi-listing management with date availability
+- ✅ Booking approval workflow that prevents double-booking once confirmed
+- 📧 Local email and SMS notifications (via smtplib) for booking updates
+- 💬 In-app chat system for hosts and confirmed guests to coordinate stays
+
+Perfect for fans of over-the-top evil lairs and seamless booking experiences.
+
+### Demo Video
+
+The headed Playwright tests (run via `pytest tests/test_presentation.py --headed`) show the full user flow in a real browser: a new user signs up, lists a location (lair), and books a stay.
+
+<video src="./demo.mp4" controls width="800"></video>
+
+*(Video demo of the app in action, including signup, listing, booking, requests, and chat.)*
+
+===============================
+
+## MakersBnB Python Project Seed
+
+This repo contains the seed codebase for the MakersBnB project in Python (using Flask and Pytest).
 
 ## Setup
 
