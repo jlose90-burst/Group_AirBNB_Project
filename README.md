@@ -1,57 +1,70 @@
 # 🏠 LairBnB
 
-**A villain-themed twist on accommodation booking** — list and hire lairs for the night, from Emperor Palpatine hosting on the Death Star to Dr. Evil’s volcano lair.
+**A full-stack villain-themed accommodation booking platform** — users can list and book fictional lairs (Death Star overlooks, Isengard towers, secret mountain hideouts) with real-time availability, approvals, notifications, and in-app messaging.
+
+Built in a one-week agile sprint using pair programming, Trello/Kanban, and test-driven development.
 
 ===============================
 
-## 🚀 About the Project
+## 🚀 Overview
 
-LairBnB is a full-stack web application built in **Python** with **Flask**, **PostgreSQL**, and **Jinja**. Developed over a one-week sprint using Trello and Kanban methodology with pair programming, the team delivered:
+LairBnB demonstrates end-to-end web application skills: user authentication, relational data modelling, booking conflict prevention, external notifications, and real-time chat — all with a polished dark-themed UI.
 
-- 🔐 User authentication and multi-listing management with date availability
-- ✅ Booking approval workflow that prevents double-booking once confirmed
-- 📧 Local email and SMS notifications (via smtplib) for booking updates
-- 💬 In-app chat system for hosts and confirmed guests to coordinate stays
+**Tech stack:** Python · Flask · PostgreSQL · Jinja2 · Pytest + Playwright · smtplib
 
-Perfect for fans of over-the-top evil lairs and seamless booking experiences.
+### Key Features
+- **Authentication & profiles** — secure signup/login with session management
+- **Lair listings** — multi-image support, descriptions, pricing, and location details
+- **Smart booking workflow** — date availability, host approval/denial, and automatic double-booking prevention
+- **Notifications** — email and SMS alerts for booking requests, confirmations, and updates
+- **In-app chat** — direct messaging between hosts and confirmed guests
+- **Responsive dark UI** — clean, themed interface with logo, cards, and intuitive navigation
 
-### Demo Video
+### Demo
 
-The headed Playwright tests (run via `pytest tests/test_presentation.py --headed`) show the full user flow in a real browser: a new user signs up, lists a location (lair), and books a stay.
-
-
+Headed Playwright end-to-end tests walk through the complete user journey (signup → list a lair → book a stay → manage requests → chat).
 
 https://github.com/user-attachments/assets/80f46cf2-b905-4e78-bf89-5cdee51f77bf
 
+===============================
 
+## 🛠️ Setup & Running Locally
+
+```shell
+# Create and activate virtual environment
+python -m venv makersbnb-venv
+source makersbnb-venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+playwright install
+
+# Create databases
+createdb YOUR_PROJECT_NAME
+createdb YOUR_PROJECT_NAME_TEST
+
+# Update database names in lib/database_connection.py
+
+# Run tests
+pytest -sv
+
+# Start the app
+python app.py
+```
+
+Visit [http://localhost:5001/](http://localhost:5001/) in your browser.
+
+**Headed presentation tests:**
+```shell
+pytest tests/test_presentation.py --headed
+```
 
 ===============================
 
-## MakersBnB Python Project Seed
+## 📋 Project Highlights for Employers
 
-This repo contains the seed codebase for the MakersBnB project in Python (using Flask and Pytest).
-
-## Setup
-
-```shell
-# Set up the virtual environment
-; python -m venv makersbnb-venv
-
-# Activate the virtual environment
-; source makersbnb-venv/bin/activate 
-
-# Install dependencies
-(makersbnb-venv); pip install -r requirements.txt
-
-# Install the virtual browser we will use for testing
-(makersbnb-venv); playwright install
-# If you have problems with the above, contact your coach
-
-# Run the tests (with extra logging)
-(makersbnb-venv); pytest -sv
-
-# Run the app
-(makersbnb-venv); python app.py
-
-# Now visit http://localhost:5001/ in your browser
-```
+- Full-stack ownership of features from database schema to UI
+- Test-driven development with unit, integration, and end-to-end (Playwright) tests
+- Real-world concerns handled: booking conflicts, notifications, multi-user flows
+- Collaborative agile delivery (pair programming + Kanban)
+- Clean architecture separating models, repositories, and routes
