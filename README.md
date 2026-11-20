@@ -19,9 +19,7 @@ Perfect for fans of over-the-top evil lairs and seamless booking experiences.
 
 The headed Playwright tests (run via `pytest tests/test_presentation.py --headed`) show the full user flow in a real browser: a new user signs up, lists a location (lair), and books a stay.
 
-[![Watch the LairBnB demo](https://raw.githubusercontent.com/jlose90-burst/Group_AirBNB_Project/main/static/images/1_1.png)](https://github.com/jlose90-burst/Group_AirBNB_Project/raw/main/demo.mp4)
-
-*Click the image above to play the demo video (signup → list a lair → book a stay → requests & chat).*
+demo.mp4
 
 ===============================
 
